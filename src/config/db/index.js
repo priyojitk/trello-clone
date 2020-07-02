@@ -1,8 +1,11 @@
 import mongoose from "mongoose";
 const MONGO_USER = process.env.MONGO_USER;
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
-const url = "mongodb://localhost:27017/trello";
-// export const url = "mongodb+srv://MONGO_USER:MONGO_PASSWORD@cluster0-z6jvu.mongodb.net/trello?retryWrites=true&w=majority";
+
+const dev = process.env.NODE_ENV !== "production";
+const dev_url = "mongodb://localhost:27017/trello";
+const prod_url = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-z6jvu.mongodb.net/trello?retryWrites=true&w=majority`;
+const url = dev ? dev_url : prod_url;
 
 // mongoose.Promise = global.Promise;
 // Connecting to the database
